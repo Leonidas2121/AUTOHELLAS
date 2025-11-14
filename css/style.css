@@ -1,0 +1,921 @@
+/* =========================================================
+   1️⃣ Reset & Βασικές ρυθμίσεις
+   ========================================================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --header-height: 72px;      /* αρχικό */
+  --header-min-height: 62px;  /* μετά το scroll */
+}
+
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background-color: #fff;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+/* =========================================================
+   2️⃣ Header & Navigation
+   ========================================================= */
+
+/* Navbar αρχικά διάφανο */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--header-height);
+  line-height: var(--header-height);
+  padding: 0.5rem 0;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1000;
+}
+
+/* Όταν κάνεις scroll */
+header.scrolled {
+  height: var(--header-min-height);
+  line-height: var(--header-min-height);
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+}
+
+.navbar {
+  height: 100%;
+  display: flex;
+  justify-content: space-between; /* μένει ίδιο */
+  flex-direction: row-reverse;    /* 🔥 αυτό αλλάζει τη σειρά */
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Logo όταν κάνουμε scroll */
+header.scrolled .logo {
+  color: #c62828;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem; /* απόσταση μεταξύ των links */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: font-size 0.25s, color 0.25s;
+}
+
+/* Links όταν κάνουμε scroll */
+header.scrolled .nav-links a {
+  position: relative;
+  font-size: 0.9rem;
+  color: #c62828;
+}
+
+header.scrolled .nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #c62828;
+  transition: width 0.3s ease;
+}
+
+header.scrolled .nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #c62828;
+}
+
+header.scrolled .nav-links a:hover {
+  color: #8b0000; /* λίγο πιο σκούρο μπλε */
+}
+
+/* =========================================================
+   3️⃣ Hero section
+   ========================================================= */
+
+.hero {
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: url("../images/truck.png") center center / cover no-repeat;
+  background-attachment: fixed; /* Parallax στα desktop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* αποτρέπει άσπρες άκρες σε μικρές οθόνες */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.42),
+    rgba(0, 0, 0, 0.58)
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  max-width: 920px;
+  padding: 1.2rem 1.4rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4.6vw, 54px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+  text-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    -2px -2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hero .subhead {
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.7;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 auto 1.6rem auto;
+  text-wrap: balance;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.hero .accent {
+  color: #ffeb3b;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Κουμπί */
+.btn {
+  display: inline-block;
+  background: #c62828;
+  color: #ffffff;
+  padding: 0.9rem 1.6rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  background: #8b0000;
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   4️⃣ Γενικά sections
+   ========================================================= */
+
+section {
+  scroll-margin-top: 120px;
+}
+
+.section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: auto;
+  opacity: 0;                 /* για τα scroll animations */
+  transition: all 0.8s ease-out;
+}
+
+/* Η Αρχική (hero) να πιάνει 100% πλάτος */
+.hero.section {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #c62828;
+}
+
+/* =========================================================
+   5️⃣ Σχετικά με Εμάς (About) – AUTOHELLAS
+   ========================================================= */
+
+.section.about-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 120px clamp(16px, 6vw, 80px);
+  background: #f7f7f9;
+}
+
+.about-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Header */
+.about-header {
+  text-align: left;
+  max-width: 640px;
+}
+
+.about-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: rgba(198, 40, 40, 0.08);
+  color: #c62828;
+  margin-bottom: 0.6rem;
+}
+
+.about-header h2 {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  color: #111827;
+  margin-bottom: 0.4rem;
+}
+
+.about-tagline {
+  font-size: 0.98rem;
+  color: #4b5563;
+}
+
+/* Main zone: text + image */
+.about-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+  gap: clamp(1.8rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.about-text-block {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+}
+
+.about-text-block p {
+  font-size: 0.98rem;
+  color: #374151;
+  margin-bottom: 0.8rem;
+}
+
+.about-text-block strong {
+  color: #c62828;
+}
+
+.about-bullets {
+  list-style: none;
+  margin-top: 1.1rem;
+}
+
+.about-bullets li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 0.4rem;
+}
+
+.about-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c62828;
+}
+
+.about-hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.about-image-card {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.about-image-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+/* Feature cards */
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.4rem;
+}
+
+.about-feature-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.2rem 1.3rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.about-feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  /* κόκκινο gradient όπως το brand */
+  background: linear-gradient(135deg, #c62828, #8b0000);
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.about-feature-card h3 {
+  font-size: 1rem;
+  color: #111827;
+}
+
+.about-feature-card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Stats strip */
+.about-stats-strip {
+  margin-top: 0.3rem;
+  border-radius: 22px;
+  padding: 1.3rem 1.4rem;
+  /* κόκκινο gradient αντί για πορτοκαλί */
+  background: linear-gradient(90deg, #c62828, #8b0000);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  color: #ffffff;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.about-stat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.about-stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.about-stat-label {
+  font-size: 0.82rem;
+  opacity: 0.95;
+}
+
+/* =========================================================
+   6️⃣ Επικοινωνία
+   ========================================================= */
+
+.contact-section h2 {
+  margin-bottom: 2rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: clamp(1.8rem, 4vw, 3rem);
+  align-items: stretch;
+}
+
+/* Αριστερή στήλη */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.contact-intro {
+  font-size: 0.98rem;
+  color: #555555;
+}
+
+.contact-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.contact-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #c62828;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.contact-item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.1rem;
+  color: #c62828;
+}
+
+.contact-item p {
+  font-size: 0.95rem;
+  color: #444444;
+}
+
+/* Δεξιά στήλη – κάρτα χάρτη */
+.contact-map-card {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+  background: #e3edf5;
+  height: 100%;
+}
+
+.contact-map-card iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  display: block;
+}
+
+/* =========================================================
+   7️⃣ ΓΕΜΗ
+   ========================================================= */
+
+.gemi-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.gemi-section h2 {
+  text-align: left;
+}
+
+.gemi-intro {
+  margin-bottom: 1.5rem;
+  color: #555555;
+  font-size: 0.96rem;
+}
+
+.gemi-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* Κάρτες */
+.gemi-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e3edf5;
+}
+
+.gemi-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  color: #c62828;
+}
+
+/* Πίνακες */
+.gemi-table {
+  min-width: 600px; /* έτσι δεν σπάει η μορφή του πίνακα */
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #c7d4e0;
+  border-radius: 10px;
+}
+
+.gemi-table th,
+.gemi-table td {
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid #edf1f5;
+  vertical-align: top;
+}
+
+.gemi-table th {
+  width: 32%;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #444444;
+  background: #f7f9fc;
+}
+
+.gemi-table td {
+  color: #333333;
+}
+
+/* Πίνακες με κεφαλίδες (εταίροι / ΚΑΔ) */
+.gemi-table-partners thead th,
+.gemi-table-activities thead th {
+  background: #c62828;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.gemi-table-partners tbody td,
+.gemi-table-activities tbody td {
+  background: #ffffff;
+}
+
+.gemi-table-partners tbody tr:nth-child(even),
+.gemi-table-activities tbody tr:nth-child(even) {
+  background: #f7f9fc;
+}
+
+.gemi-note {
+  margin-top: 0.8rem;
+  font-size: 0.84rem;
+  color: #777777;
+}
+
+/* =========================================================
+   8️⃣ Scroll Animations
+   ========================================================= */
+
+/* Fade Up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(140px);
+  transition:
+    transform 1.6s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade Down */
+.fade-down {
+  opacity: 0;
+  transform: translateY(-140px);
+  transition:
+    transform 1.6s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
+}
+
+.fade-down.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* From Left */
+.fade-left {
+  opacity: 0;
+  transform: translateX(-140px);
+  transition:
+    transform 1.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
+}
+
+.fade-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* From Right */
+.fade-right {
+  opacity: 0;
+  transform: translateX(140px);
+  transition:
+    transform 1.7s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 1.4s ease;
+}
+
+.fade-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* =========================================================
+   9️⃣ Mobile Menu / Hamburger
+   ========================================================= */
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Όταν γίνει scroll αλλάζει χρώμα */
+header.scrolled .mobile-menu-btn {
+  color: #c62828;
+}
+
+/* Slide-in menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 75%;
+  height: 100vh;
+  background: rgba(50, 50, 50, 0.45); /* διάφανο γκρι */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 1.6rem;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 18px rgba(0, 0, 0, 0.25);
+  transition: right 0.35s ease;
+}
+
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.7rem;
+}
+
+.mobile-menu-header button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.mobile-menu-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: opacity 0.2s ease;
+}
+
+.mobile-menu-links a:hover {
+  opacity: 0.7;
+}
+
+/* =========================================================
+   🔟 Footer
+   ========================================================= */
+
+.footer {
+  width: 100%;
+  background: #c62828;
+  padding: 1.2rem 0;
+  margin-top: 80px; /* απόσταση από το GEMI ώστε να μην κολλάει */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   1️⃣1️⃣ Media Queries (Responsiveness)
+   ========================================================= */
+
+/* 1) Μέχρι 992px – γενικά για το About */
+@media (max-width: 992px) {
+  /* About – 1 στήλη */
+  .about-main {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image-card img {
+    max-height: 280px;
+  }
+}
+
+/* 2) Μέχρι 900px – Contact */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map-card {
+    height: 280px;
+  }
+}
+
+/* 3) Μέχρι 768px – tablets */
+@media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll; /* απενεργοποιεί το parallax στα κινητά */
+  }
+
+  .hero-content {
+    padding: 0.8rem 1rem;
+  }
+
+  .hero .subhead {
+    line-height: 1.6;
+  }
+
+  /* About – padding & στοίχιση */
+  .section.about-section {
+    padding: 90px clamp(16px, 6vw, 40px);
+  }
+
+  .about-header {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .about-text-block {
+    padding: 1.3rem 1.4rem;
+  }
+
+  .about-bullets li {
+    font-size: 0.9rem;
+  }
+
+  .about-stats-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* GEMI */
+  .gemi-section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .gemi-card {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .gemi-table th,
+  .gemi-table td {
+    padding: 0.45rem 0.45rem;
+    font-size: 0.88rem;
+  }
+
+  /* Mobile navigation: κρύβουμε τα desktop links */
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+/* 4) Μέχρι 480px – μικρές συσκευές / κινητά */
+@media (max-width: 480px) {
+  .hero {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll !important;
+    height: 85vh;
+  }
+
+  .hero-content {
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .subhead {
+    font-size: 0.9rem;
+  }
+
+  .section {
+    padding: 70px 14px;
+    max-width: 100% !important;
+  }
+
+  /* extra fine-tuning για το About */
+  .section.about-section {
+    padding: 80px 14px;
+  }
+
+  .about-stats-strip {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.2rem;
+  }
+}
+
+
+
+
